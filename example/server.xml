@@ -5,8 +5,6 @@
     <featureManager>
         <feature>webProfile-7.0</feature>
         <feature>adminCenter-1.0</feature>
-        <feature>collectiveMember-1.0</feature>
-        <feature>clusterMember-1.0</feature>
     </featureManager>
 
     <basicRegistry id="basic">
@@ -27,6 +25,4 @@
 
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
-
-    <clusterMember name="myCluster"/>
 </server>
