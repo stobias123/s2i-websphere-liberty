@@ -1,0 +1,1 @@
+-Xshareclasses:name=docker -Dclient.encoding.override=UTF-8 -javaagent:/opt/AppDynamics/javaagent.jar -Dorg.osgi.framework.bootdelegation=com.singularity.*
