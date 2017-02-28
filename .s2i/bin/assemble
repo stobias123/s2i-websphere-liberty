@@ -16,12 +16,11 @@ if [ -f /tmp/src/jvm.options ]
     chown websphere.websphere /config/jvm/options
 fi
 
-echo "---> Copying EAR files"
-
+echo "---> Copying dropin files"
+echo "----->" `ls /tmp/src/dropins`
 if [ -d /tmp/src/dropins ]
   then
-    cp /tmp/src/dropins/*.ear /config/dropins
-    cp /tmp/src/dropins/*.war /config/dropins
+    cp /tmp/src/dropins/* /config/dropins
 fi
 
 echo "---> Copy the server.xml"
