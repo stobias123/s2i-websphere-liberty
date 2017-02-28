@@ -6,7 +6,8 @@ echo "---> Install the additional features"
 FEATURES=`cat /tmp/src/server.xml | \
               grep \<feature\>  | \
               sed -e 's,.*<feature>\([^<]*\)</feature>.*,\1,g' | \
-              sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`
+              sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' | \
+              sed 's/webProfile-7.0//g'`
 
 if [ ! -z "$FEATURES" ]
   then
@@ -22,22 +23,21 @@ if [ -f /tmp/src/jvm.options ]
 fi
 
 echo "---> Copying dropin files"
-if [ -d /tmp/src/dropins ]
+if [  "$(ls -A /tmp/src/dropins)" ]
   then
     cp -v /tmp/src/dropins/* /config/dropins
 fi
 
 echo "---> Copying dropin files"
-if [ -f /tmp/src/lib/* ]
+if [ "$(ls -A /tmp/src/lib)" ]
   then
     cp -v /tmp/src/lib/* /config/lib/
 fi
 
 echo "---> Copy the server.xml"
 
-cp -c /tmp/src/server.xml /config
+cp -v /tmp/src/server.xml /config
 
 echo "---> Fix permissions on liberty directories"
 
 chmod -Rf g+w /config /opt/ibm/wlp /logs
-#chmod -Rf g+w /opt/app-root/htdocs || true
