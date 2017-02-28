@@ -10,13 +10,19 @@ fi
 
 echo "--> Copy in the jvm options"
 
-cp /tmp/src/jvm.options /config/jvm/options
-chown websphere.websphere /config/jvm/options
+if [ -f /tmp/src/jvm.options ]
+  then
+    cp /tmp/src/jvm.options /config/jvm/options
+    chown websphere.websphere /config/jvm/options
+fi
 
 echo "---> Copying EAR files"
 
-cp /tmp/src/dropins/*.ear /config/dropins
-cp /tmp/src/dropins/*.war /config/dropins
+if [ -d /tmp/src/dropins ]
+  then
+    cp /tmp/src/dropins/*.ear /config/dropins
+    cp /tmp/src/dropins/*.war /config/dropins
+fi
 
 echo "---> Copy the server.xml"
 
