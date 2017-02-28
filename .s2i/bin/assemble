@@ -3,6 +3,11 @@
 set -eo pipefail
 
 echo "---> Install the additional features"
+FEATURES=`cat /tmp/src/server.xml | \
+              grep \<feature\>  | \
+              sed -e 's,.*<feature>\([^<]*\)</feature>.*,\1,g' | \
+              sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g'`
+
 if [ ! -z "$FEATURES" ]
   then
     installUtility install --acceptlicense $FEATURES
@@ -12,20 +17,25 @@ echo "--> Copy in the jvm options"
 
 if [ -f /tmp/src/jvm.options ]
   then
-    cp /tmp/src/jvm.options /config/jvm/options
-    chown websphere.websphere /config/jvm/options
+    cp -v /tmp/src/jvm.options /config/jvm/options
+    chown -v websphere.websphere /config/jvm/options
 fi
 
 echo "---> Copying dropin files"
-echo "----->" `ls /tmp/src/dropins`
 if [ -d /tmp/src/dropins ]
   then
-    cp /tmp/src/dropins/* /config/dropins
+    cp -v /tmp/src/dropins/* /config/dropins
+fi
+
+echo "---> Copying dropin files"
+if [ -f /tmp/src/lib/* ]
+  then
+    cp -v /tmp/src/lib/* /config/lib/
 fi
 
 echo "---> Copy the server.xml"
 
-cp /tmp/src/server.xml /config
+cp -c /tmp/src/server.xml /config
 
 echo "---> Fix permissions on liberty directories"
 

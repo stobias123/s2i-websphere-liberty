@@ -13,7 +13,7 @@ COPY ./.s2i/bin/ /usr/local/s2i
 
 
 RUN useradd websphere \
-    && mkdir -p /config/jvm /config/dropins \
+    && mkdir -p /config/jvm /config/dropins /config/lib \
     && chown -R websphere.websphere /opt/ibm/wlp /logs /config
 
 USER websphere
