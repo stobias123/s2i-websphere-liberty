@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -eo pipefail
+
+echo "---> Install the additional features"
+if [ ! -z "$FEATURES" ]
+  then
+    installUtility install --acceptlicense $FEATURES
+fi
+
+echo "--> Copy in the jvm options"
+
+cp /tmp/src/jvm.options /config/jvm/options
+chown websphere.websphere /config/jvm/options
+
+echo "---> Copying EAR files"
+
+cp /tmp/src/dropins/*.ear /config/dropins
+cp /tmp/src/dropins/*.war /config/dropins
+
+echo "---> Copy the server.xml"
+
+cp /tmp/src/server.xml /config
+
+echo "---> Fix permissions on liberty directories"
+
+chmod -Rf g+w /config /opt/ibm/wlp /logs
+#chmod -Rf g+w /opt/app-root/htdocs || true

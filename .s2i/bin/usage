@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+cat <<EOF
+This is a websphere-liberty S2I image:
+To use it, install S2I: https://github.com/openshift/source-to-image
+
+Sample invocation:
+
+s2i build https://github.com/final_url --context-dir=test/test-app/ websphere-liberty sample-app
+
+You can then run the resulting image via:
+docker run -p 80:9080 -p 443:9443 sample-app
+EOF
