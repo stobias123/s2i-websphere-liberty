@@ -22,13 +22,22 @@ if [ -f /tmp/src/jvm.options ]
     chown -v websphere.websphere /config/jvm/options
 fi
 
+echo "--> Copy in the jvm options"
+
+if [ -f /tmp/src/repositories.properties ]
+  then
+    mkdir -p /opt/ibm/wlp/etc
+    cp -v /tmp/src/repositories.properties /opt/ibm/wlp/etc/repositories.properties
+    chown -v websphere.websphere /opt/ibm/wlp/etc/repositories.properties
+fi
+
 echo "---> Copying dropin files"
 if [  "$(ls -A /tmp/src/dropins)" ]
   then
     cp -v /tmp/src/dropins/* /config/dropins
 fi
 
-echo "---> Copying dropin files"
+echo "---> Copying lib files"
 if [ "$(ls -A /tmp/src/lib)" ]
   then
     cp -v /tmp/src/lib/* /config/lib/

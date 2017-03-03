@@ -4,10 +4,10 @@ MAINTAINER Steven Tobias <stobias@harborfreight.com>
 LABEL io.k8s.description="Platform for serving Websphere Liberty Applications" \
       io.k8s.display-name="Websphere Liberty webProfile7 1.01" \
       io.openshift.expose-services="9080:http,9443:https" \
-      io.openshift.tags="builder,html,websphere-liberty-openshift"
+      io.openshift.tags="builder,html,websphere-liberty-openshift" \
+      io.openshift.s2i.scripts-url=image:///usr/local/s2i
 
-# Defines the location of the S2I
-LABEL io.openshift.s2i.scripts-url=image:///usr/local/s2i
+
 # Copy the S2I scripts from ./.s2i/bin/ to /usr/local/s2i when making the builder image
 COPY ./.s2i/bin/ /usr/local/s2i
 
