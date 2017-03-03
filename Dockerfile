@@ -12,11 +12,11 @@ LABEL io.openshift.s2i.scripts-url=image:///usr/local/s2i
 COPY ./.s2i/bin/ /usr/local/s2i
 
 
-RUN useradd websphere \
+RUN useradd -u 1001 websphere\
     && mkdir -p /config/jvm /config/dropins /config/lib \
-    && chown -R websphere.websphere /opt/ibm/wlp /logs /config
+    && chown -R 1001:0 /opt/ibm/wlp /logs /config
 
-USER websphere
+USER 1001
 
 # Specify the ports the final image will expose
 # These are already exposed in websphere-liberty:kernel. Added here for clarity
