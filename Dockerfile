@@ -22,5 +22,6 @@ USER 1001
 # These are already exposed in websphere-liberty:kernel. Added here for clarity
 EXPOSE 8080 9443
 
+WORKDIR /config
 # Set the default CMD to print the usage of the image, if somebody does docker run
 CMD ["usage"]
