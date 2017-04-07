@@ -1,0 +1,33 @@
+<!-- Define the host name for use by the collective.
+     If the host name needs to be changed, the server should be
+     removed from the collective and re-joined or re-replicated. -->
+<variable name="defaultHostName" value="7e845dca7479" />
+
+<!-- TODO: Set the security configuration for Administrative access -->
+<quickStartSecurity userName="admin" userPassword="admin" />
+
+<!-- clientAuthenticationSupported set to enable bidirectional trust -->
+<ssl id="defaultSSLConfig"
+     keyStoreRef="defaultKeyStore"
+     trustStoreRef="defaultTrustStore"
+     clientAuthenticationSupported="true" />
+
+<!-- inbound (HTTPS) keystore -->
+<keyStore id="defaultKeyStore" password="{xor}Lz4sLCgwLTs="
+          location="${server.config.dir}/resources/security/key.jks" />
+
+<!-- inbound (HTTPS) truststore -->
+<keyStore id="defaultTrustStore" password="{xor}Lz4sLCgwLTs="
+          location="${server.config.dir}/resources/security/trust.jks" />
+
+<!-- server identity keystore -->
+<keyStore id="serverIdentity" password="{xor}Lz4sLCgwLTs="
+          location="${server.config.dir}/resources/collective/serverIdentity.jks" />
+
+<!-- collective trust keystore -->
+<keyStore id="collectiveTrust" password="{xor}Lz4sLCgwLTs="
+          location="${server.config.dir}/resources/collective/collectiveTrust.jks" />
+
+<!-- collective root signers keystore -->
+<keyStore id="collectiveRootKeys" password="{xor}Lz4sLCgwLTs="
+          location="${server.config.dir}/resources/collective/rootKeys.jks" />

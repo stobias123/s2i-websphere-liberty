@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-echo "---> Install the additional features"
+echo "---> FIND  the additional features"
 FEATURES=`cat /tmp/src/server.xml | \
               grep \<feature\>  | \
               sed -e 's,.*<feature>\([^<]*\)</feature>.*,\1,g' | \
@@ -40,9 +40,8 @@ fi
 
 echo "---> Copy the server.xml"
 
-cp -v /tmp/src/server.xml /config
+cp -rv /tmp/src/config/* /config
 
-echo "---> Install features"
 
 if [ ! -z "$FEATURES" ]
   then
