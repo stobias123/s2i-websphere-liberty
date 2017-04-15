@@ -18,12 +18,12 @@
     <administrator-role>
        <user>admin</user>
     </administrator-role>
-    <include location="/config/collective-create-include.xml" />
     <!-- To allow access to this server from a remote client host="*" has been added to the following element -->
     <httpEndpoint id="defaultHttpEndpoint"
                   host="*"
-		  httpPort="9080"
+                  httpPort="9080"
                   httpsPort="9443" />
+
 
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>
