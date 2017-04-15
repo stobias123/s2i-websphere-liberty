@@ -2,40 +2,40 @@
 
 set -eo pipefail
 
-echo "---> FIND  the additional features"
-FEATURES=`cat /tmp/src/server.xml | \
+echo "---> Find  the additional features"
+FEATURES=`cat server.xml | \
               grep \<feature\>  | \
               sed -e 's,.*<feature>\([^<]*\)</feature>.*,\1,g' | \
               sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' | \
               sed 's/webProfile-7.0//g'`
 
-echo "--> Copy in the jvm options"
+echo "---> Copy in the jvm options"
 
 if [ -f /tmp/src/jvm.options ]
   then
-    cp -v /tmp/src/jvm.options /config/jvm/options
-    chown -v websphere.websphere /config/jvm/options
+    cp  /tmp/src/jvm.options /config/jvm/options
+    chown websphere.websphere /config/jvm/options
 fi
 
-echo "--> Copy in the repositories file"
+echo "---> Copy in the repositories file"
 
 if [ -f /tmp/src/repositories.properties ]
   then
     mkdir -p /opt/ibm/wlp/etc
-    cp -v /tmp/src/repositories.properties /opt/ibm/wlp/etc/repositories.properties
-    chown -v websphere.websphere /opt/ibm/wlp/etc/repositories.properties
+    cp /tmp/src/repositories.properties /opt/ibm/wlp/etc/repositories.properties
+    chown websphere.websphere /opt/ibm/wlp/etc/repositories.properties
 fi
 
 echo "---> Copying dropin files"
 if [  "$(ls -A /tmp/src/dropins)" ]
   then
-    cp -v /tmp/src/dropins/* /config/dropins
+    cp /tmp/src/dropins/* /config/dropins
 fi
 
 echo "---> Copying lib files"
 if [ "$(ls -A /tmp/src/lib)" ]
   then
-    cp -v /tmp/src/lib/* /config/lib/
+    cp /tmp/src/lib/* /config/lib/
 fi
 
 echo "---> Copy the server.xml"
