@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<server description="Default server">
+<server description="Controller Server">
 
     <!-- Enable features -->
     <featureManager>
         <feature>webProfile-7.0</feature>
         <feature>adminCenter-1.0</feature>
+        <feature>collectiveController-1.0</feature>
         <feature>collectiveMember-1.0</feature>
         <feature>clusterMember-1.0</feature>
     </featureManager>
@@ -24,6 +25,7 @@
                   httpPort="9080"
                   httpsPort="9443" />
 
+    <include location="/config/collective-create-include.xml" />
 
     <!-- Automatically expand WAR files and EAR files -->
     <applicationManager autoExpand="true"/>

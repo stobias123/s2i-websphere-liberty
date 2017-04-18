@@ -1,10 +1,10 @@
 <!-- Define the host name for use by the collective.
      If the host name needs to be changed, the server should be
      removed from the collective and re-joined or re-replicated. -->
-<variable name="defaultHostName" value="7e845dca7479" />
+<variable name="defaultHostName" value="controller-server" />
 
 <!-- TODO: Set the security configuration for Administrative access -->
-<quickStartSecurity userName="admin" userPassword="admin" />
+<quickStartSecurity userName="admin" userPassword="adminpwd" />
 
 <!-- clientAuthenticationSupported set to enable bidirectional trust -->
 <ssl id="defaultSSLConfig" keyStoreRef="defaultKeyStore" trustStoreRef="defaultTrustStore" clientAuthenticationSupported="true" />
