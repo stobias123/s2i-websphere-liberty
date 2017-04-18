@@ -2,13 +2,6 @@
 
 set -eo pipefail
 
-echo "---> Find  the additional features"
-FEATURES=`cat server.xml | \
-              grep \<feature\>  | \
-              sed -e 's,.*<feature>\([^<]*\)</feature>.*,\1,g' | \
-              sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' | \
-              sed 's/webProfile-7.0//g'`
-
 echo "---> Copy in the jvm options"
 
 if [ -f /tmp/src/jvm.options ]
@@ -42,6 +35,14 @@ echo "---> Copy the server.xml"
 
 cp -rv /tmp/src/config/* /config
 
+echo "---> Find  the additional features"
+FEATURES=`cat /config/server.xml | \
+              grep \<feature\>  | \
+              sed -e 's,.*<feature>\([^<]*\)</feature>.*,\1,g' | \
+              sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' | \
+              sed 's/webProfile-7.0//g'`
+
+echo "----> $FEATURES"
 
 if [ ! -z "$FEATURES" ]
   then
